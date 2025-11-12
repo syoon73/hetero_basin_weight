@@ -89,7 +89,10 @@ def run_target(
 	sl = sl_class[args.sl_mode](
 		target_idx,
 		len(basin_list),
+		args.sim_thr,
+		args.sim_scale,
 		args.lam,
+		args.mom,
 		args.mu,
 	)
 	sl.to(device)
@@ -118,7 +121,6 @@ def run_target(
 				network,
 				loader_train_per_basin,
 				device,
-				num_parallel_groups=args.num_parallel_groups,
 				num_basin_batches=args.num_basin_batches,
 			)
 			print(

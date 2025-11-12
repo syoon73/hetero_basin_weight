@@ -35,10 +35,11 @@ args = {
 	"rnn_dropout": 0,
 	"regression_dropout": 0,  # 0.4
 	"sl_mode": "ef",
+	"sim_thr": 0,
+	"sim_scale": 1.96,
 	"lam": 0.25,
 	"mu": 0.0,
 	"discard_negative_similarity": True,
-	"num_parallel_groups": 2,
 	"num_basin_batches": 1,
 	"batch_size": 256,
 	"num_workers": 1,

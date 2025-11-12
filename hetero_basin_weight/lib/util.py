@@ -33,12 +33,14 @@ def get_argparser() -> argparse.ArgumentParser:
 	parser.add_argument("--regression_dropout", type=float, default=0)
 
 	parser.add_argument("--sl_mode", type=str, default="ef")
+	parser.add_argument("--sim_thr", type=float, default=0.0)
+	parser.add_argument("--sim_scale", type=float, default=1.96)
 	parser.add_argument("--lam", type=float, default=0.25)
+	parser.add_argument("--mom", type=float, default=0.1)
 	parser.add_argument("--mu", type=float, default=0.0)
 	parser.add_argument(
 		"--discard_negative_similarity", action="store_true", default=False
 	)
-	parser.add_argument("--num_parallel_groups", type=int, default=4)
 	parser.add_argument("--num_basin_batches", type=int, default=0)
 
 	parser.add_argument("--batch_size", type=int, default=256)
@@ -55,7 +57,7 @@ def get_argparser() -> argparse.ArgumentParser:
 
 
 def get_args_str(args: argparse.Namespace) -> str:
-	model_name = f"{args.rnn_type}_{'reduced_' if args.reduce_static else ''}static{'_aug' if args.augment_de else ''}_{args.length}_{args.shift}_hidden_size_{args.hidden_size}_num_layers_{args.num_rnn_layers}_{args.num_regression_layers}_basl2_{args.sl_mode}{'_dns' if args.discard_negative_similarity else ''}_{args.lam}_{args.mu}"
+	model_name = f"{args.rnn_type}_{'reduced_' if args.reduce_static else ''}static{'_aug' if args.augment_de else ''}_{args.length}_{args.shift}_hidden_size_{args.hidden_size}_num_layers_{args.num_rnn_layers}_{args.num_regression_layers}_basl_{args.sl_mode}_{args.sim_thr}{'_dns' if args.discard_negative_similarity else ''}_{args.sim_scale}_{args.lam}_{args.mom}_{args.mu}"
 
 	if args.augment_de:
 		assert args.reduce_static
